@@ -10,6 +10,9 @@ import banner_mens from '../public/Frontend_Assets/banner_mens.png'
 import banner_womens from '../public/Frontend_Assets/banner_women.png'
 import banner_kids from '../public/Frontend_Assets/banner_kids.png'
 import LoginSignup from './Pages/LoginSignup'
+import Product from './Pages/Product'
+import ShopContextProvider from './Pages/ShopContext'
+import Cart from './Pages/Cart'
 
 function AppWrapper() {
   const location = useLocation();
@@ -20,12 +23,14 @@ function AppWrapper() {
   }, [location.pathname]);
 
   const hideHeaderFooter = location.pathname === '/login';
+  const hideHeader = location.pathname === '/cart';
   console.log("Current Path:", location.pathname);
   return (
     <>
-      {!hideHeaderFooter && <Header />}
+      {(!hideHeaderFooter && !hideHeader) && <Header />}
       {!hideHeaderFooter && <br />}
       {!hideHeaderFooter && <br />}
+      {/* {!hideHeader && <Header />} */}
 
       <Routes>
         <Route path='/' element={<Landing_page />} />
@@ -34,8 +39,9 @@ function AppWrapper() {
         <Route path='/kids' element={<ShopCategory banner={banner_kids} category="kid" />} />
         <Route path='/collection' element={<Collections />} />
         <Route path='/login' element={<LoginSignup />} />
+        <Route path='/product/:productId' element={<Product />} />
+        <Route path='/cart' element={<Cart />} />
       </Routes>
-
       {!hideHeaderFooter && <Footer_down />}
     </>
   );
@@ -43,9 +49,11 @@ function AppWrapper() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppWrapper />
-    </BrowserRouter>
+    <ShopContextProvider>
+      <BrowserRouter>
+        <AppWrapper />
+      </BrowserRouter>
+    </ShopContextProvider>  
   );
 }
 

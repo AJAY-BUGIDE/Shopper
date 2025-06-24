@@ -22,7 +22,7 @@ const Header = () => {
           </ul>
           <div className='flex items-center gap-10'>
               <button onClick={()=>navigate('/login')} className='font-medium w-30 h-10 bg-gray-300 rounded-2xl cursor-pointer  hover:bg-pink-600 transition'>Login</button>
-              <img src={logo} alt="" />
+              <img onClick={()=>navigate('/cart')} src={logo} alt="" />
               <div className='flex items-center text-center -mt-8 -ml-12 rounded-2xl w-3 h-4 bg-red-500'>0</div>
           </div>
       </div>
